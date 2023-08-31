@@ -1,9 +1,11 @@
 import React from "react";
 import Button from "./Button";
 
-function Friend({ friend }) {
+function Friend({ friend, onSelection, selectedFriend }) {
+  const isSelected = selectedFriend?.id === friend.id;
+
   return (
-    <li>
+    <li className={selectedFriend?.id === friend.id}>
       <img src={friend.image} alt={friend.name} />
       <h3>{friend.name}</h3>
       {friend.balance < 0 && (
@@ -21,7 +23,9 @@ function Friend({ friend }) {
           {friend.name} and you are even {Math.abs(friend.balance)}$
         </p>
       )}
-      <Button> Select </Button>
+      <Button onClick={() => onSelection(friend)}>
+        {isSelected ? "Close" : "select"}
+      </Button>
     </li>
   );
 }
